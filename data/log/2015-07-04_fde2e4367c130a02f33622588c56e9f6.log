@@ -1,0 +1,8 @@
+2015-07-04 04:13:57 | 127.0.0.1 | /manager/index.php | 无法连接到数据库服务器<br>
+					<b>SQL</b>: <br>
+					<b>错误详情</b>: Access denied for user 'root'@'localhost' (using password: YES)<br>
+					<b>错误代码</b>:1045<br>
+2015-07-04 04:15:27 | 127.0.0.1 | /manager/index.php |imgs模块不存在
+2015-07-04 04:15:27 | 127.0.0.1 | /manager/index.php |order-form模块不存在
+2015-07-04 04:15:27 | 127.0.0.1 | /manager/index.php |user-form模块不存在
+2015-07-04 04:15:27 | 127.0.0.1 | /manager/index.php |css模块不存在
