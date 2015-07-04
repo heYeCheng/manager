@@ -1,0 +1,6 @@
+2015-06-09 15:52:54 | 192.168.1.108 | /cheetah/index.php |index模块不存在
+2015-06-09 16:17:26 | 192.168.1.108 | /cheetah/index.php |orderMod类未定义
+2015-06-09 23:28:26 | ::1 | /cheetah/index.php | MySQL Query Error<br>
+					<b>SQL</b>: SELECT g_id, g_name, price, pooint FROM goods  WHERE  `t_id` = '1' <br>
+					<b>错误详情</b>: Unknown column 'pooint' in 'field list'<br>
+					<b>错误代码</b>:1054<br>

@@ -1,0 +1,23 @@
+2015-06-10 12:45:32 | ::1 | /cheetah/index.php | MySQL Query Error<br>
+					<b>SQL</b>: INSERT INTO order  (`o_id`,`p_id`,`addr`,`phone`,`s_id`,`num`,`money`,`point`,`status`) VALUES ('EX5577c0ec90328','2','13-422','18514235444','1','2','36','10','0') <br>
+					<b>错误详情</b>: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order  (`o_id`,`p_id`,`addr`,`phone`,`s_id`,`num`,`money`,`point`,`status`) VALU' at line 1<br>
+					<b>错误代码</b>:1064<br>
+2015-06-10 12:52:10 | ::1 | /cheetah/index.php | MySQL Query Error<br>
+					<b>SQL</b>: INSERT INTO order  (`o_id`,`p_id`,`addr`,`phone`,`s_id`,`num`,`money`,`point`,`status`) VALUES ('EX5577c27a1654c','2','13-422','18514235444','1','2','36','10','0') <br>
+					<b>错误详情</b>: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order  (`o_id`,`p_id`,`addr`,`phone`,`s_id`,`num`,`money`,`point`,`status`) VALU' at line 1<br>
+					<b>错误代码</b>:1064<br>
+2015-06-10 12:59:09 | ::1 | /cheetah/index.php | MySQL Query Error<br>
+					<b>SQL</b>: INSERT INTO order  (`o_id`,`p_id`,`addr`,`phone`,`s_id`,`g_id`,`num`,`money`,`point`,`status`) VALUES ('EX5577c41d6b950','2','13-422','18514235444','1','2','2','36','10','0') <br>
+					<b>错误详情</b>: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order  (`o_id`,`p_id`,`addr`,`phone`,`s_id`,`g_id`,`num`,`money`,`point`,`status' at line 1<br>
+					<b>错误代码</b>:1064<br>
+2015-06-10 13:10:40 | ::1 | /cheetah/index.php | MySQL Query Error<br>
+					<b>SQL</b>: INSERT INTO order  (`o_id`,`p_id`,`addr`,`phone`,`s_id`,`g_id`,`num`,`money`,`point`,`status`) VALUES ('EX5577c6d006c23','2','13-422','18514235444','1','2','2','36','10','0') <br>
+					<b>错误详情</b>: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order  (`o_id`,`p_id`,`addr`,`phone`,`s_id`,`g_id`,`num`,`money`,`point`,`status' at line 1<br>
+					<b>错误代码</b>:1064<br>
+2015-06-10 16:43:07 | ::1 | /cheetah/index.php | MySQL Query Error<br>
+					<b>SQL</b>: SELECT g_type, money, time FROM `info_person`  WHERE  `p_id` = '2' <br>
+					<b>错误详情</b>: Unknown column 'g_type' in 'field list'<br>
+					<b>错误代码</b>:1054<br>
+2015-06-10 17:19:42 | ::1 | /cheetah/index.php |orther模块不存在
+2015-06-10 17:19:53 | ::1 | /cheetah/index.php |other模块不存在
+2015-06-10 23:22:30 | ::1 | /cheetah/index.php |reg模块不存在
