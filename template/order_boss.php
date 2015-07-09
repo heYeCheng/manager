@@ -36,7 +36,7 @@
                         <td width="60">{$vo['num']}</td>
                         <td width="70">{$vo['send_name']}</td>
                         <td width="90"></td>
-                        <td class="static-red" width="80"></td>
+                        <td class="static-red"></td>
                     </tr>
                     <?php } ?>
                     </tbody>

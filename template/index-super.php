@@ -303,8 +303,7 @@
                                 <th width="150">学校</th>
                                 <th width="90">宿舍号</th>
                                 <th width="100">拥有积分</th>
-                                <th width="90">状态</th>
-                                <th>操作</th>
+                                <th >状态</th>
                             </tr>
                             </thead>
                         </table>
