@@ -124,7 +124,72 @@ class brandMod extends commonMod{
 		echo json_encode($return_arr);
 	}
 
+	// 获取某个学校拥有的所有有机会上架的品牌
+	public function get_school_brand(){
+		$sqlGood = new sql_goodMod();
+		$s_id = $this->in_get('id', None, 1, 'True');
+		$res = $sqlGood->get_brand_manager($s_id);
+		echo json_encode($res);
+	}
 
+	// 用于删除某个学校的某个品牌的水
+	public function del_school_brand(){
+		$sqlGood = new sql_goodMod();
+		$s_id = $this->in_get('id', None, 1, 'True');
+		$g_id = $this->in_get('gid', None, 1, 'True');
+		$res = $sqlGood->del_good_manager($s_id, $g_id);
+		echo "suss";
+	}
+
+	// 用于保存水品牌
+	public function save_school_brand(){
+		$sqlGood = new sql_goodMod();
+
+		$json = $this->in_post('json', None, 2, 'True');
+		$json = urldecode($json);
+		$json = json_decode($json, True);
+		$s_id = $this->in_post('id', None, 1, 'True');
+
+		$oldObj = $json['oldO'];
+		$newObj = $json['newO'];
+
+		foreach ($newObj as $value) {
+			$price = floatval($value[1]);
+			$point = intval($value[2]);
+			$f_id = intval($value[0]);
+
+			$good_res = $sqlGood->get_good_manager($f_id);
+			if ($good_res) {
+				$data['t_id'] = 1;
+				$data['f_id'] = $f_id;
+				$data['s_id'] = $s_id;
+				$data['a_id'] = $good_res['a_id'];
+				$data['g_name'] = $good_res['g_name'];
+				$data['pic'] = $good_res['pic'];
+				$data['price'] = $price;
+				$data['point'] = $point;
+
+				$this->model->table($this->config['goods'])->data($data)->insert();
+			}
+		}
+
+		foreach ($oldObj as $value) {
+			$price = floatval($value[1]);
+			$point = intval($value[2]);
+			$g_id = intval($value[0]);
+
+			$con['g_id'] = $g_id;
+			$up_data['price'] = $price;
+			$up_data['point'] = $point;
+
+			$this->model->table($this->config['goods'])->data($up_data)->where($con)->update();
+		}
+
+		echo "suss";
+	}
+
+	// 用于删除某商品
+	
 }
 
 ?>

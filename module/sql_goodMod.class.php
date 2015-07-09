@@ -100,8 +100,54 @@ class sql_goodMod extends commonMod{
 	
 	///////////////////////////////////////////////////////////// 以上这些全开放给经销商自己管理 
 
+
+
+
 	///////////////////////////////////////////////////////////// 以下这些只面向管理员
-	
+
+	/**
+	* 获取某商品信息
+	* @param g_id  表示获取某款产品的信息
+	*/
+	public function get_good_manager($g_id){
+		$con['s_id'] = -1;
+		$con['g_id'] = $g_id;
+
+		$field = 'a_id, g_name, pic';
+		$res = $this->model->table($this->config['goods'])->field($field)->where($con)->find();
+		
+		return $res;
+	}
+
+	/**
+	* 用于删除某商品
+	* @param s_id  学校的 id
+	* @param g_id  表示某款产品的 id
+	*/
+	public function del_good_manager($s_id, $g_id){
+		$con['s_id'] = $s_id;
+		$con['g_id'] = $g_id;
+
+		$res = $this->model->table($this->config['goods'])->where($con)->delete();
+		return $res;
+	}
+
+	/**
+	* 获取此所有品牌信息，此级别是超级管理员接口
+	*/
+	public function get_brand_manager($s_id = 0){
+		$con['t_id'] = 1;
+		if ($s_id > 0) {
+			$con['s_id'] = $s_id;
+			$field = 'a.sell_name as name, g_id, f_id, g_name, price, point';
+		}else{
+			$con['s_id'] = -1;
+			$field = 'a.sell_name as name, g_id, g_name, price, point';
+		}
+
+		$res = $this->model->table('goods as g LEFT JOIN admin as a on a.a_id=g.a_id')->field($field)->where($con)->select();
+		return $res;
+	}
 }
 
 ?>

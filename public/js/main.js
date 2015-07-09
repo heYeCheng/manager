@@ -15,7 +15,6 @@ function selectModule(n){
     rowContent[n].className = "row row-content";
 }
 
-
 //给学校添加关联品牌
 function addBrandToSchool(){
     var form = document.getElementById("brand-price-school-form");
@@ -47,6 +46,7 @@ function addBrandToSchool(){
                 }
             }
         }
+        $(newDiv).find('.shool_brand_id').val('')
         form.appendChild(newDiv);
     }
 }
@@ -107,10 +107,41 @@ function deleteBrandFromSchool(btn){
         if (length == 1) {
             alert("至少关联一个品牌");
         } else {
-
-
             form.removeChild(divDel);
+            dele_school_brand(btn)
         }
+    }
+}
+
+//删除学校关联的品牌，功能同上，只是不需确认而已
+function deleteBrandFromSchool_c(btn){
+    var form = document.getElementById("brand-price-school-form");
+    var divDel = btn.parentNode;
+    var selectDel = divDel.getElementsByTagName("select")[0];
+    var defaultOptVal = 0;
+
+    for (var i = 0; i < selectDel.options.length; i++) {
+        if (selectDel.options[i].defaultSelected) {
+            defaultOptVal = selectDel.options[i].innerHTML;
+        }
+    }
+    //获取父盒子
+    var div = document.getElementsByClassName("brand-for-school-item");
+    for (var i = 0; i < div.length; i++) {
+        var optionsAll = div[i].getElementsByTagName("select")[0].options;
+        for (var j = 0; j < optionsAll.length; j++) {
+            if (optionsAll[j].innerHTML == defaultOptVal) {
+                optionsAll[j].removeAttribute("disabled");
+            }
+        }
+    }
+    var length = div.length;
+    if (length == 1) {
+        alert("至少关联一个品牌");
+    } else {
+
+
+        form.removeChild(divDel);
     }
 }
 

@@ -11,25 +11,33 @@ class indexMod extends commonMod{
 			$sqlGood = new sql_goodMod();
 			$sqlSend = new sql_sendMod();
 
-			// $a_id = 2;   ################## 这个是管理员 id，必须严格控制
-			$a_id = $this->in_cookie('aid', None, 1, 'True');
+			$this->assign('user', $_COOKIE['name']);
 
-			$good_info = $sqlGood->get_brand($a_id);
-			$this->assign('g_info', $good_info);
-			
 			// 获取学校信息
 			$school_info = $this->model->table($this->config['school'])->field($field)->where($con)->select();
 			$this->assign('s_info', $school_info);
 
-			// 获取配送员信息
-			$sender_info = $sqlSend->get_sender($a_id);
-			$this->assign('sd_info', $sender_info);
-			$this->assign('user', $_COOKIE['name']);
+			if ($_COOKIE['power'] == 0) {
+				$brand_info = $sqlGood->get_brand_manager();
+				$this->assign('b_info', $brand_info);
 
-			$this->display('index');
+				$this->display('index-super');
+			}else if ($_COOKIE['power'] == 1) {
+				// $a_id = 2;   ################## 这个是管理员 id，必须严格控制
+				$a_id = $this->in_cookie('aid', None, 1, 'True');
+
+				$good_info = $sqlGood->get_brand($a_id);
+				$this->assign('g_info', $good_info);
+
+				// 获取配送员信息
+				$sender_info = $sqlSend->get_sender($a_id);
+				$this->assign('sd_info', $sender_info);
+
+				$this->display('index');
+			}
 		}
-
 	}
+
 
 	// 用户登录
 	public function login(){

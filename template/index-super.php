@@ -48,155 +48,91 @@
                     <div class="clearfix"></div>
                 </div>
                 <ul class="nav nav-sidebar">
-                    <li class="leftBtn active"><a href="javascript:void(0)" onclick="selectModule(0)"><span class="icon-color glyphicon glyphicon-heart"></span>&nbsp;&nbsp;品牌管理</span></a></li>
-                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(1)"><span class="icon-color glyphicon glyphicon-user"></span>&nbsp;&nbsp;订水员管理</a></li>
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(0)" class="left-btn"><span class="icon-color glyphicon glyphicon-education"></span>&nbsp;&nbsp;学校管理</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(2)"><span class="icon-color glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;订单管理</span><!--<span class="badge">9999</span>--></a></li><!--订水老板版-->
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(1)"><span class="icon-color glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;订单管理</span><!--<span class="badge">9999</span>--></a></li><!--订水老板版-->
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(2)"><span class="icon-color glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <!-- <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(3)"><span class="icon-color glyphicon glyphicon glyphicon-stats"></span>&nbsp;&nbsp;数据分析</span></a></li> -->
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(3)"><span class="icon-color glyphicon glyphicon glyphicon-stats"></span>&nbsp;&nbsp;数据分析</span></a></li>
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(4)"><span class="icon-color glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;反馈信息</span></a></li>
                 </ul>
             </div>
         </div>
 
-        <!--品牌管理-->
-        <div class="row row-content ">
+
+        <!--学校管理-->
+        <div class="row row-content display-none">
             <div class="col-xs-10 main brand-manage ">
-                <!--品牌设置-->
+                <!--学校设置-->
                 <div class="content">
-                    <!--品牌列表-->
+                    <!--学校列表-->
                     <div class="col-xs-2 brand-list">
                         <div class="span-box">
-                            <span>品牌列表</span>
-                            <button class="btn btn-primary btn-sm brand-btn" data-toggle="modal" data-target="#brand-ntbox" >添加</button>
+                            <span>学校列表</span>
                         </div>
                         <ul class="nav nav-stacked brand-nav">
-                            <?php if(is_array($g_info)) foreach($g_info as $vo){ ?>
-                                <li role="presentation"><a href="#" onclick="showBrand({$vo['g_id']})">{$vo['g_name']}</a><button class="brand-list-btn-delete" onclick="delBrand({$vo['g_id']})">删除</button></li>
+                            <?php if(is_array($s_info)) foreach($s_info as $vo){ ?>
+                                <li role="presentation"><a href="#" onclick="showSchool({$vo['s_id']}, '{$vo['pic']}')">{$vo['name']}</a></li>
                             <?php } ?>
                         </ul>
                     </div>
 
-                    <!--品牌信息详情-->
+                    <!--学校信息详情-->
                     <div class="col-xs-10 col-xs-offset-2 brand-inform-content">
-                        <!--品牌基本信息-->
+                        <!--学校基本信息-->
                         <div class="brand-basic－inform">
                             <div class="span-inform-box">
-                                <span>基本信息</span><button class="btn btn-default btn-sm brand-btn-default" onclick="save_brand_pic()">保存</button>
+                                <span>基本信息</span><button class="btn btn-default btn-sm brand-btn-default">保存</button>
                             </div>
                         </div>
-                        <p>品牌LOGO</p>
+                        <p>学校LOGO</p>
                         <a class="setting-upload-avatar" href="javascript:;">
-                            <img src="imgs/brand-logo-default.jpg" class="setting-upload-preview img-circle" id="bandImg" />
-                            <form action="__ROOT__/brand/saveBasic_Pic" enctype="multipart/form-data" method="post" id="setting-upload-img-form">
+                            <img src="http://image17-c.poco.cn/best_pocoers/20150629/98872015062909234939981645_165.jpg" id="school_logo" class="setting-upload-preview img-circle"/>
+                            <form action="" enctype="multipart/form-data" method="post" id="setting-upload-img-form">
                                 <input type="file" class="setting-avatar" value="" name="setting-avatar"/>
-                                <input type="hidden" id="pic_id" name="id">
                             </form>
                         </a>
 
-                        <!--品牌定价积分信息-->
+                        <!--关联水品牌-->
                         <div class="brand-default-inform">
-                            <div class="span-inform-box">
-                                <span>设置默认定价和积分信息</span><button class="btn btn-default btn-sm brand-btn-default" onclick="save_brand_basic()">保存</button>
-                            </div>
-                        </div>
-                        <form class="brand-price-form" enctype="text/plain" action="__ROOT__/brand/saveBasic" method="get" id="form_brand_basic">
-                            <input type="hidden" id="basic_id" name="id">
-                            <div class="col-xs-2 price-input">
-                                <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    <input type="text" id="moneyBarrel" name="moneyBarrel" class="form-control" aria-label="Amount (to the nearest dollar)">
-                                    <span class="input-group-addon">元/桶</span>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-2 price-input">
-                                <div class="input-group">
-                                    <span class="input-group-addon "><span class="glyphicon glyphicon-star"></span></span>
-                                    <input type="text" id="pointBarrel" name="pointBarrel" class="form-control " aria-label="Amount (to the nearest dollar)">
-                                    <span class="input-group-addon">积分/桶</span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!--品牌信息详情-->
-
-                </div>
-            </div>
-        </div>
-
-
-        <!--订水员管理-->
-        <div class="row row-content display-none">
-            <div class="col-xs-10 main brand-manage ">
-                <!--订水员设置-->
-                <div class="content">
-                    <!--订水员列表-->
-                    <div class="col-xs-2 brand-list">
-                        <div class="span-box">
-                            <span>订水员列表</span>
-                            <button class="btn btn-primary btn-sm brand-btn" data-toggle="modal" data-target="#distribution-ntbox">添加</button>
-                        </div>
-                        <ul class="nav nav-stacked brand-nav">
-                            <?php if(is_array($sd_info)) foreach($sd_info as $vo){ ?>
-                                <li role="presentation"><a href="#" onclick="showSend({$vo['send_id']})">{$vo['name']}</a><button class="brand-list-btn-delete" onclick="delSend({$vo['send_id']})">删除</button></li>
-                            <?php } ?>
-                        </ul>
-                    </div>
-
-                    <!--订水员信息详情-->
-                    <div class="col-xs-10 col-xs-offset-2 brand-inform-content">
-                        <!--工作信息-->
-                        <div class="brand-basic－inform">
                             <div class="span-inform-box distribution-title-box">
-                                <span>工作信息</span>
-                                <!--<button class="btn btn-primary btn-sm school-btn">添加配送学校</button>-->
-                                <button class="btn btn-default btn-sm school-btn2" onclick="save_send()">保存</button>
+                                <span>包含的水品牌</span>
+                                <a class="btn btn-primary btn-sm school-btn3" onclick="addBrandToSchool()">添加</a><button class="btn btn-default btn-sm brand-for-school-btn2" onclick="save_shool_brand()">保存</button>
                             </div>
                         </div>
-                        <form class="brand-price-school-form-distribution">
-                                <ul class="school-inform-box">
+                        <div class="shool_brand_invisible">
+                            <?php if(is_array($b_info)) foreach($b_info as $vo){ ?>
+                                <input type="hidden" value="{$vo['g_id']}@@{$vo['price']}@@{$vo['point']}">
+                            <?php } ?>
+                        </div>
+                        <form class="brand-price-school-form" id="brand-price-school-form" action="__URL__/brand/save_school_brand">
+                            <div class="brand-for-school-item schoool_brand_div">
+                                <select class="form-control school_brand" onchange="changeOptions(this)">
+                                    <!-- <option selected="true">娃哈1哈</option> -->
+                                    <?php if(is_array($b_info)) foreach($b_info as $vo){ ?>
+                                        <option value="{$vo['g_id']}">{$vo['g_name']} - {$vo['name']}</option>
+                                    <?php } ?>
+                                </select>
+                                <div class="col-xs-2 price-input">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control moneyBuddle" aria-label="Amount (to the nearest dollar)">
+                                        <span class="input-group-addon">元/桶</span>
+                                    </div>
+                                </div>
 
-                                    <li>
-                                        <span>选学校</span>
-                                        <select class="form-control" id="send_school">
-                                            <?php if(is_array($s_info)) foreach($s_info as $vo){ ?>
-                                                <option value="{$vo['s_id']}">{$vo['name']}</option>
-                                            <?php } ?>
-                                        </select>
-                                        <a class="btn btn-primary btn-sm school-btn" onclick="addDorToSchool()">添加宿舍</a>
-                                        <!--<a class="btn btn-sm school-btn-red">删除学校</a>--待开发-->
-                                        <div class="dormitory-whole-box" id="dormitory-whole-box">
-                                            <div class="dormitory-box">
-                                                <select class="form-control send_addr" onchange="changeDorOpt(this)">
-                                                    <option value="1">1栋</option>
-                                                    <option value="2">2栋</option>
-                                                    <option value="3">3栋</option>
-                                                    <option value="4">4栋</option>
-                                                    <option value="5">5栋</option>
-                                                    <option value="6">6栋</option>
-                                                    <option value="7">7栋</option>
-                                                    <option value="8">8栋</option>
-                                                    <option value="9">9栋</option>
-                                                    <option value="10">10栋</option>
-                                                    <option value="11">11栋</option>
-                                                    <option value="12">12栋</option>
-                                                    <option value="13" selected="true">13栋</option>
-                                                    <option value="14">14栋</option>
-                                                    <option value="15">15栋</option>
-                                                    <option value="16">16栋</option>
-                                                    <option value="17">17栋</option>
-                                                </select>
-                                                <a href="javascript:void(0)" class="brand-school-btn-delete" onclick="delDor(this)">删除</a>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </div>
-
-                                    </li>
-
-                                    <div class="clearfix"></div>
-                                </ul>
+                                <div class="col-xs-2 price-input">
+                                    <div class="input-group">
+                                        <span class="input-group-addon "><span class="glyphicon glyphicon-star"></span></span>
+                                        <input type="text" class="form-control pointBuddle" aria-label="Amount (to the nearest dollar)">
+                                        <span class="input-group-addon">积分/桶</span>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="shool_brand_id" value="">
+                                <a href="javascript:void(0)" class="brand-school-btn-delete" onclick="deleteBrandFromSchool(this)">删除</a>
+                            </div>
                         </form>
                     </div>
 
@@ -204,8 +140,9 @@
             </div>
         </div>
 
-        <!--订单管理-订水老板-->
-        <div class="row row-content display-none">
+
+        <!--订单管理-->
+        <div class="row row-content display-none ">
             <div class="col-xs-10 main brand-manage ">
                 <!--订单管理-->
                 <div class="content content-left-border">
@@ -218,14 +155,14 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <div class="input-prepend input-group">
-                                                    <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input type="text" readonly style="width: 200px" name="reservation" id="reservation-boss" class="form-control back-color-w" value="2015-6-21 - 2015-6-29" />
+                                                    <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input type="text" readonly style="width: 200px" name="reservation" id="reservation-order" class="form-control back-color-w" value="2014-5-21 - 2014-6-21" />
                                                 </div>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <script type="text/javascript">
                                         $(document).ready(function() {
-                                            $('#reservation-boss').daterangepicker(null, function(start, end, label) {
+                                            $('#reservation-order').daterangepicker(null, function(start, end, label) {
                                                 console.log(start.toISOString(), end.toISOString(), label);
                                             });
                                         });
@@ -233,38 +170,34 @@
                                 </div>
 
                                 <!--品牌-->
-                                <select class="form-control" id="boss_send_status">
-                                    <option value="">状态</option>
-                                    <option value="0">未配送</option>
-                                    <option value="1">正在配送</option>
-                                    <option value="2">已配送</option>
+                                <select class="form-control">
+                                    <option>品牌</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </select>
                                 <!--学校-->
-                                <select class="form-control" id="boss_send_sd">
-                                    <option value="">配送员</option>
-                                    <?php if(is_array($sd_info)) foreach($sd_info as $vo){ ?>
-                                        <option value="{$vo['send_id']}">{$vo['name']}</option>
-                                    <?php } ?>
+                                <select class="form-control">
+                                    <option>学校</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </select>
                                 <!--订单状态-->
-                                <select class="form-control" id="boss_send_sc">
-                                    <option value="">学校</option>
-                                    <?php if(is_array($s_info)) foreach($s_info as $vo){ ?>
-                                        <option value="{$vo['s_id']}">{$vo['name']}</option>
-                                    <?php } ?>
+                                <select class="form-control">
+                                    <option>状态</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </select>
-                                <select class="form-control" id="boss_send_brand">
-                                    <option value="">品牌</option>
-                                    <?php if(is_array($g_info)) foreach($g_info as $vo){ ?>
-                                        <option value="{$vo['g_id']}">{$vo['g_name']}</option>
-                                    <?php } ?>
-                                </select>
+                                <a class="btn btn-sm table-btn table-check-btn">查看</a>
 
-                                <a class="btn btn-sm table-btn table-check-btn" onclick="check_order_boss()">查看</a>
-
-                                <a class="btn btn-sm table-btn table-import-btn" onclick="del_order_boss()">删除</a>
-                                <a class="btn btn-sm table-btn table-import-btn" onclick="finish_order_boss()">完成</a>
-                                <a class="btn btn-sm table-btn table-import-btn" onclick="export_order_boss()">导出</a>
+                                <a class="btn btn-sm table-btn table-import-btn">删除</a>
+                                <a class="btn btn-sm table-btn table-import-btn">完成</a>
+                                <a class="btn btn-sm table-btn table-import-btn">导出</a>
                             </form>
                         </div>
                     </nav>
@@ -274,28 +207,27 @@
                         <table class="table table-striped table-head-height">
                             <thead>
                             <tr>
-                                <th width="50"><input id="order-boss-ck" type="checkbox" class="checkbox-head" onclick="checkAll('order-boss','order-boss-ck')"/></th>
+                                <th width="50"><input id="order-admin-ck" type="checkbox" class="checkbox-head" onclick="checkAll('order-admin','order-admin-ck')"/></th>
                                 <th width="140">日期</th>
                                 <th width="80">用户名</th>
                                 <th width="120">手机号</th>
                                 <th width="150">学校</th>
-                                <th width="80">宿舍号</th>
-                                <th width="80">品牌</th>
+                                <th width="90">宿舍号</th>
+                                <th width="90">品牌</th>
                                 <th width="60">数量</th>
-                                <th width="70">送货员</th>
-                                <th width="90">结算方式</th>
-                                <th width="80">状态</th>
-                                <th>操作</th>
-
+                                <th width="100">结算方式</th>
+                                <th width="90">状态</th>
                             </tr>
                             </thead>
                         </table>
                     </div>
                     <!--表格内容-->
-                    <iframe id="order-boss" src="__ROOT__/oboss" width="100%" height="79%" frameborder=”no” border=”0″ marginwidth=”0″ marginheight=”0″ scrolling="yes" allowtransparency=”yes”></iframe>
+                    <iframe id="order-admin" src="order-form.html" width="100%" height="79%" frameborder=”no” border=”0″ marginwidth=”0″ marginheight=”0″ scrolling="yes" allowtransparency=”yes”></iframe>
+
                 </div>
             </div>
         </div>
+
 
         <!--用户管理-->
         <div class="row row-content display-none">
@@ -388,7 +320,10 @@
 
         </div>
 
+        <!--用户反馈-->
+        <div class="row row-content display-none">
 
+        </div>
     </div>
 
     <!--模态框-->
