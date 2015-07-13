@@ -51,7 +51,7 @@ class indexMod extends commonMod{
 			$res = False;
 		}
 		if ($res) {
-			$this->redirect(__ROOT__);
+			$this->redirect('/');
 		}else{
 			$this->alert('用户名或密码错误');
 		}
@@ -61,7 +61,7 @@ class indexMod extends commonMod{
 	public function logout(){
 		$safeMod = new safeMod();
 		$safeMod->logout();
-		$this->redirect(__ROOT__);
+		$this->redirect('/');
 	}
 
 }

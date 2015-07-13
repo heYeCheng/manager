@@ -284,9 +284,7 @@
                                 <th width="60">数量</th>
                                 <th width="70">送货员</th>
                                 <th width="90">结算方式</th>
-                                <th width="80">状态</th>
-                                <th>操作</th>
-
+                                <th>状态</th>
                             </tr>
                             </thead>
                         </table>

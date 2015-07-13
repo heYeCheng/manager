@@ -19,7 +19,7 @@ function init(){
 function showBrand(id) {
 	cur_brand_id = id
 	$.getJSON("./brand/handleBrand?type=show&id=" + id, function(data) {
-		$('#bandImg').attr('src', data['pic']);  
+		$('#bandImg').attr('src', '../public/' + data['pic']);  
 		$('#moneyBarrel').val(data['price']);
 		$('#pointBarrel').val(data['point']);
 	}); 

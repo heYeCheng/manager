@@ -80,7 +80,7 @@ class brandMod extends commonMod{
 		$upload->allowExts  = explode(',','jpg,gif,png');
 	
 		//设置附件上传目录
-		$upload->savePath ='./images/goods/';
+		$upload->savePath ='../public/image/';
 		$upload->saveRule = cp_uniqid;
 
 		if(!$upload->upload()){
@@ -92,7 +92,8 @@ class brandMod extends commonMod{
 			$up_res = $upload->getUploadFileInfo();
 		}
 
-		$update_res = $sqlGood->set_brand_info_pic($a_id, $g_id, $upload->savePath.$up_res[0]['savename']);
+		$ex_path = 'image/';
+		$update_res = $sqlGood->set_brand_info_pic($a_id, $g_id, $ex_path.$up_res[0]['savename']);
 
 		if ($update_res) {
 			$this->alert('更新成功');

@@ -29,12 +29,12 @@ class sql_orderMod extends commonMod{
 		}
 
 		if (!empty($ex_d) and !empty($pr_d)) {
-			$con .= ' and created >\'' .$ex_d. '\' and created <\''.$pr_d.'\'';
+			$con .= ' and created >=\'' .$ex_d. '\' and created <=\''.$pr_d.'\'';
 		}
 		$con .= ' and flag = 0';
 
 		$page = new Page();
-		$listRows = 8; //产品每页显示的信息条数
+		$listRows = 1; //产品每页显示的信息条数
 		// $url=__URL__.'?p={page}';//分页基准网址
 		$cur_page = $page->getCurPage($url);
 		$limit_start = ($cur_page-1)*$listRows;
@@ -70,7 +70,7 @@ class sql_orderMod extends commonMod{
 		}
 
 		if (!empty($ex_d) and !empty($pr_d)) {
-			$con .= ' and created >\'' .$ex_d. '\' and created <\''.$pr_d.'\'';
+			$con .= ' and created >=\'' .$ex_d. '\' and created <=\''.$pr_d.'\'';
 		}
 		$con .= ' and flag = 0';
 

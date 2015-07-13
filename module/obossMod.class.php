@@ -17,11 +17,12 @@ class obossMod extends commonMod{
 		$sender = $this->in_get('sd', 0, 1);
 		$school = $this->in_get('sc', 0, 1);
 		$brand = $this->in_get('brand', 0, 1);
-		$ex_d = $this->in_get('ex_d', '', 2);
-		$pr_d = $this->in_get('pr_d', '', 2);
+		$ex_d = $this->in_get('ex_d', date('Y-m-d'), 2);
+		$pr_d = $this->in_get('pr_d', date('Y-m-d', strtotime('+1 day')), 2);
 
 		$url = preg_replace("/&p=\d+/", '', $_SERVER['REQUEST_URI']);
 		$url .= '&p={page}';
+		$url = str_replace('oboss&p', 'oboss?p', $url);
 
 		$res = $sqlOrder->get_order($a_id, $url, $status, $sender, $school, $brand, $ex_d, $pr_d);
 
@@ -44,8 +45,8 @@ class obossMod extends commonMod{
 		$sender = $this->in_get('sd', 0, 1);
 		$school = $this->in_get('sc', 0, 1);
 		$brand = $this->in_get('brand', 0, 1);
-		$ex_d = $this->in_get('ex_d', '', 2);
-		$pr_d = $this->in_get('pr_d', '', 2);
+		$ex_d = $this->in_get('ex_d', date('Y-m-d'), 2);
+		$pr_d = $this->in_get('pr_d', date('Y-m-d', strtotime('+1 day')), 2);
 
 		$res = $sqlOrder->export_order($a_id, $status, $sender, $school, $brand, $ex_d, $pr_d);
 		if ($res) {
