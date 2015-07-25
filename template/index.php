@@ -43,8 +43,8 @@
             <!--菜单栏-->
             <div class="col-xs-2 sidebar">
                 <div class="user-box">
-                    <p class="user-name">{$user}</p>
-                    <a class="logout-btn" href="__ROOT__/index/logout">注销</a>
+                    <p class="user-name">徐曹植</p>
+                    <a class="logout-btn" href="#">注销</a>
                     <div class="clearfix"></div>
                 </div>
                 <ul class="nav nav-sidebar">
@@ -55,11 +55,13 @@
                 <ul class="nav nav-sidebar">
                     <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(3)"><span class="icon-color glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;订单管理</span><!--<span class="badge">9999</span>--></a></li>
                     <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(4)"><span class="icon-color glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;订单管理</span><!--<span class="badge">9999</span>--></a></li><!--订水老板版-->
-                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(5)"><span class="icon-color glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(5)"><span class="icon-color glyphicon glyphicon-piggy-bank"></span>&nbsp;&nbsp;预定记录</a></li>
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(6)"><span class="icon-color glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;空桶管理</a></li>
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(7)"><span class="icon-color glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(6)"><span class="icon-color glyphicon glyphicon glyphicon-stats"></span>&nbsp;&nbsp;数据分析</span></a></li>
-                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(7)"><span class="icon-color glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;反馈信息</span></a></li>
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(8)"><span class="icon-color glyphicon glyphicon glyphicon-stats"></span>&nbsp;&nbsp;数据分析</span></a></li>
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(9)"><span class="icon-color glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;反馈信息</span></a></li>
                 </ul>
             </div>
         </div>
@@ -459,6 +461,230 @@
                 </div>
             </div>
         </div>
+
+                <!--预定记录-->
+                <div class="row row-content display-none ">
+                    <div class="col-xs-10 main brand-manage ">
+                        <!--预定-->
+                        <div class="content content-left-border">
+                            <nav class="nav col-xs-12 table-box">
+                                <div class="table-control">
+                                    <form class="form-horizontal">
+                                        <!--时间-->
+                                        <div class="calendar-box">
+                                            <fieldset>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <div class="input-prepend input-group">
+                                                            <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input type="text" readonly style="width: 200px" name="reservation" id="reservation-schedule" class="form-control back-color-w" value="2014-5-21 - 2014-6-21" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    $('#reservation-schedule').daterangepicker(null, function(start, end, label) {
+                                                        console.log(start.toISOString(), end.toISOString(), label);
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+
+                                        <!--学校-->
+                                        <select class="form-control">
+                                            <option>学校</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                        <!--宿舍号-->
+                                        <select class="form-control">
+                                            <option>宿舍号</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                        <!--订单状态-->
+                                        <select class="form-control">
+                                            <option>品牌</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                        <a class="btn btn-sm table-btn table-check-btn">查看</a>
+
+                                        <a class="btn btn-sm table-btn table-import-btn">删除</a>
+                                        <a class="btn btn-sm table-btn table-import-btn">导出</a>
+                                    </form>
+                                </div>
+                            </nav>
+
+                            <!--表头-->
+                            <div class="table-content-box-head">
+                                <table class="table table-striped table-head-height">
+                                    <thead>
+                                    <tr>
+                                        <th width="50"><input id="schedule-check" type="checkbox" class="checkbox-head" onclick="checkAll('schedule-tbody','schedule-check')"/></th>
+                                        <th width="140">日期</th>
+                                        <th width="80">用户名</th>
+                                        <th width="120">手机号</th>
+                                        <th width="150">学校</th>
+                                        <th width="100">宿舍号</th>
+                                        <th width="90">品牌</th>
+                                        <th width="90">预定数量</th>
+                                        <th>剩余数量</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <!--表格内容-->
+                            <iframe id="schedule-tbody" src="schedule-tbody.html" width="100%" height="79%" frameborder=”no” border=”0″ marginwidth=”0″ marginheight=”0″ scrolling="yes" allowtransparency=”yes”></iframe>
+
+                            <!--换页按钮-->
+                            <div class="page-change-box">
+                                <nav>
+                                    <ul class="pagination page-btn-box">
+                                        <li>
+                                            <a href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">6</a></li>
+                                        <li><a href="#">7</a></li>
+                                        <li><a href="#">8</a></li>
+                                        <li><a href="#">9</a></li>
+                                        <li><a href="#">10</a></li>
+                                        <li>
+                                            <a href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--空桶管理-->
+                <div class="row row-content display-none ">
+                    <div class="col-xs-10 main brand-manage ">
+                        <!--空桶-->
+                        <div class="content content-left-border">
+                            <nav class="nav col-xs-12 table-box">
+                                <div class="table-control">
+                                    <form class="form-horizontal">
+                                        <!--时间-->
+                                        <div class="calendar-box">
+                                            <fieldset>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <div class="input-prepend input-group">
+                                                            <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input type="text" readonly style="width: 200px" name="reservation" id="reservation-empty" class="form-control back-color-w" value="2014-5-21 - 2014-6-21" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    $('#reservation-empty').daterangepicker(null, function(start, end, label) {
+                                                        console.log(start.toISOString(), end.toISOString(), label);
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+
+                                        <!--学校-->
+                                        <select class="form-control">
+                                            <option>学校</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                        <!--宿舍号-->
+                                        <select class="form-control">
+                                            <option>宿舍号</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                        <!--订单状态-->
+                                        <select class="form-control">
+                                            <option>品牌</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                        <a class="btn btn-sm table-btn table-check-btn">查看</a>
+
+                                        <a class="btn btn-sm table-btn table-import-btn">删除</a>
+                                        <a class="btn btn-sm table-btn table-import-btn"  id="empty-button-substitute" disabled="disabled">空桶数修改</a>
+                                        <a class="btn btn-sm table-btn table-import-btn" data-toggle="modal" data-target="#empty-change" id="empty-button" style="display: none;">空桶数修改</a>
+                                        <a class="btn btn-sm table-btn table-import-btn">导出</a>
+                                    </form>
+                                </div>
+                            </nav>
+
+                            <!--表头-->
+                            <div class="table-content-box-head">
+                                <table class="table table-striped table-head-height">
+                                    <thead>
+                                    <tr>
+                                        <th width="50"><input id="empty-check" type="checkbox" class="checkbox-head" onclick="checkAll('empty-tbody','empty-check')"/></th>
+                                        <th width="140">最近订水时间</th>
+                                        <th width="150">学校</th>
+                                        <th width="120">宿舍号</th>
+                                        <th width="80">用户名</th>
+                                        <th width="100">电话</th>
+                                        <th>空桶数量</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <!--表格内容-->
+                            <iframe id="empty-tbody" src="empty-tbody.html" width="100%" height="79%" frameborder=”no” border=”0″ marginwidth=”0″ marginheight=”0″ scrolling="yes" allowtransparency=”yes”></iframe>
+
+                            <!--换页按钮-->
+                            <div class="page-change-box">
+                                <nav>
+                                    <ul class="pagination page-btn-box">
+                                        <li>
+                                            <a href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">6</a></li>
+                                        <li><a href="#">7</a></li>
+                                        <li><a href="#">8</a></li>
+                                        <li><a href="#">9</a></li>
+                                        <li><a href="#">10</a></li>
+                                        <li>
+                                            <a href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
         <!--用户管理-->
         <div class="row row-content display-none">

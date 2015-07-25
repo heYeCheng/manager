@@ -7,11 +7,11 @@ function checkAll(iframe,checkbox){
 
     if(!headCheck.checked){
         for(var i=0; i<tbody.length; i++){
-            tbody[i].removeAttribute('checked');
+            tbody[i].checked = false;
         }
     }else{
         for(var i=0; i<tbody.length; i++){
-            tbody[i].setAttribute("checked","true");
+            tbody[i].checked = true;
         }
     }
 }

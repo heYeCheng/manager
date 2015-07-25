@@ -113,6 +113,20 @@ function deleteBrandFromSchool(btn){
         }
     }
 }
+//重置关联的宿舍
+function resetDor(){
+    var dormitoryBox = document.getElementById('dormitory-whole-box');
+    var firstSelect = document.getElementsByClassName('form-control')[0];
+
+    firstSelect.innerHTML = "<option></option>";
+
+    var firstDor = document.getElementsByClassName('dormitory-box')[0];
+    var cloneFirstDor = firstDor.cloneNode(true);
+
+    dormitoryBox.innerHTML = "";
+
+    dormitoryBox.appendChild(cloneFirstDor);
+}
 
 
 //送水员关联学校&宿舍
@@ -237,5 +251,27 @@ function delDor_C(btn){
         alert("至少关联该学校的一栋宿舍楼");
     } else {
         faDiv.removeChild(divDel);
+    }
+}
+
+//修改空桶数量功能是否可用
+function oneCheck(){
+    var td = document.getElementsByClassName('checkbox-tbody');
+    var trueNum = 0;
+    var btn = parent.document.getElementById('empty-button');
+    var btnSubstitute = parent.document.getElementById('empty-button-substitute');
+
+
+    for(var i=0;i<td.length;i++){
+        if(td[i].checked==true){
+            trueNum++;
+        }
+    }
+    if(trueNum == 1){
+        btn.style.display = 'block';
+        btnSubstitute.style.display = 'none';
+    }else{
+        btn.style.display = 'none';
+        btnSubstitute.style.display = 'block';
     }
 }
