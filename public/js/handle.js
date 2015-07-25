@@ -19,7 +19,7 @@ function init(){
 function showBrand(id) {
 	cur_brand_id = id
 	$.getJSON("./brand/handleBrand?type=show&id=" + id, function(data) {
-		$('#bandImg').attr('src', data['pic']);  
+		$('#bandImg').attr('src', '../public/' + data['pic']);  
 		$('#moneyBarrel').val(data['price']);
 		$('#pointBarrel').val(data['point']);
 	}); 
@@ -47,9 +47,64 @@ function save_brand_pic(){
 /////////////// 以上是关于 品牌管理 模块
 
 /////////////// 以下是关于 学校管理 模块
+
+// 用于展示某个学校已经拥有的水品牌，即上架商品
 function showSchool(id, logo){
 	cur_school_id = id;
 	$('#school_logo').attr('src', logo)
+
+	$.getJSON("./brand/get_school_brand?id=" + id, function(data) {
+		$('.school_brand').each(function(i) {
+			if (i > 0) {
+				deleteBrandFromSchool_c(this)
+			};
+		});
+
+		for (var i = 0; i < data.length; i++) {
+			if (i > 0) {
+				addBrandToSchool();
+			};
+			$('.school_brand:eq('+ i +')').val(data[i]['f_id'])
+			$('.schoool_brand_div:eq('+ i +') .shool_brand_id').val(data[i]['g_id'])
+			$('.schoool_brand_div:eq('+ i +') .moneyBuddle').val(data[i]['price'])
+			$('.schoool_brand_div:eq('+ i +') .pointBuddle').val(data[i]['point'])
+		};
+		
+	}); 
+}
+
+// 保存上架的商品，将删除的商品下架
+function save_shool_brand(){
+	var oldObj = []
+	var newObj = []
+	$('.schoool_brand_div').each(function(){
+		idVal = $(this).find('.shool_brand_id').val()  // 商品的id
+		if (idVal) {  // 如果有商品的 id ，就证明这个商品已存在，否则为新增加商品，必需获得此商品的父级商品
+			oldObj.push([idVal, $(this).find('.moneyBuddle').val(), $(this).find('.pointBuddle').val()])
+		}else{
+			fid = $(this).find('.school_brand').val()
+			newObj.push([fid, $(this).find('.moneyBuddle').val(), $(this).find('.pointBuddle').val()])
+		}
+	});
+
+	arr = new Object();
+	arr.newO = newObj
+	arr.oldO = oldObj
+	str = JSON.stringify(arr)
+	str = encodeURI(str)
+	$.post("./brand/save_school_brand", {json:str, id:cur_school_id} ,function(data) {
+		alert('更新成功')
+	});
+}
+
+// 下架某学校的某个商品
+function dele_school_brand(obj){
+	idVal = $(obj).parent().find('.shool_brand_id').val()  // 商品的id
+	if (idVal) {  // 只允许删除有 商品id  的商品
+		$.get("./brand/del_school_brand", {gid:idVal, id:cur_school_id} ,function(data) {
+			alert('删除成功')
+		});
+	};
 }
 
 /////////////// 以上是关于 学校管理 模块
@@ -76,6 +131,23 @@ function finish_order_boss(){
 			alert('更新失败')
 		}
 	});
+}
+
+
+function export_order_boss(){
+	// 导出 订单
+	status = $('#boss_send_status').val()
+	sd = $('#boss_send_sd').val()
+	sc = $('#boss_send_sc').val()
+	brand = $('#boss_send_brand').val()
+	date = $('#reservation-boss').val()
+	dateArr = date.split(' - ')
+
+	// $.get("./oboss/export", {'status':status, 'sd':'sd', 'sc':'sc', 'brand':'brand', 'ex_d':'ex_d', 'pr_d':'pr_d'} ,function(data) {
+	// });
+
+	url = './oboss/export?status='+ status + '&sd=' + sd + '&sc=' + sc + '&brand=' + brand + '&ex_d=' + dateArr[0] + '&pr_d=' + dateArr[1]
+	window.location.href = url
 }
 
 function del_order_boss(){

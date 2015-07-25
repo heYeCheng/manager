@@ -49,10 +49,10 @@
                 </div>
                 <ul class="nav nav-sidebar">
                     <li class="leftBtn active"><a href="javascript:void(0)" onclick="selectModule(0)"><span class="icon-color glyphicon glyphicon-heart"></span>&nbsp;&nbsp;品牌管理</span></a></li>
-                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(1)" class="left-btn"><span class="icon-color glyphicon glyphicon-education"></span>&nbsp;&nbsp;学校管理</a></li>
-                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(2)"><span class="icon-color glyphicon glyphicon-user"></span>&nbsp;&nbsp;订水员管理</a></li>
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(1)"><span class="icon-color glyphicon glyphicon-user"></span>&nbsp;&nbsp;订水员管理</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
+<<<<<<< HEAD
                     <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(3)"><span class="icon-color glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;订单管理</span><!--<span class="badge">9999</span>--></a></li>
                     <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(4)"><span class="icon-color glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;订单管理</span><!--<span class="badge">9999</span>--></a></li><!--订水老板版-->
                     <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(5)"><span class="icon-color glyphicon glyphicon-piggy-bank"></span>&nbsp;&nbsp;预定记录</a></li>
@@ -62,6 +62,12 @@
                 <ul class="nav nav-sidebar">
                     <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(8)"><span class="icon-color glyphicon glyphicon glyphicon-stats"></span>&nbsp;&nbsp;数据分析</span></a></li>
                     <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(9)"><span class="icon-color glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;反馈信息</span></a></li>
+=======
+                    <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(2)"><span class="icon-color glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;订单管理</span><!--<span class="badge">9999</span>--></a></li><!--订水老板版-->
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <!-- <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(3)"><span class="icon-color glyphicon glyphicon glyphicon-stats"></span>&nbsp;&nbsp;数据分析</span></a></li> -->
+>>>>>>> f386109c9a214daf9c3e531a8454df1fea2be1d5
                 </ul>
             </div>
         </div>
@@ -132,78 +138,6 @@
             </div>
         </div>
 
-        <!--学校管理-->
-        <div class="row row-content display-none">
-            <div class="col-xs-10 main brand-manage ">
-                <!--学校设置-->
-                <div class="content">
-                    <!--学校列表-->
-                    <div class="col-xs-2 brand-list">
-                        <div class="span-box">
-                            <span>学校列表</span>
-                        </div>
-                        <ul class="nav nav-stacked brand-nav">
-                            <?php if(is_array($s_info)) foreach($s_info as $vo){ ?>
-                                <li role="presentation"><a href="#" onclick="showSchool({$vo['s_id']}, '{$vo['pic']}')">{$vo['name']}</a></li>
-                            <?php } ?>
-                        </ul>
-                    </div>
-
-                    <!--学校信息详情-->
-                    <div class="col-xs-10 col-xs-offset-2 brand-inform-content">
-                        <!--学校基本信息-->
-                        <div class="brand-basic－inform">
-                            <div class="span-inform-box">
-                                <span>基本信息</span><button class="btn btn-default btn-sm brand-btn-default">保存</button>
-                            </div>
-                        </div>
-                        <p>学校LOGO</p>
-                        <a class="setting-upload-avatar" href="javascript:;">
-                            <img src="http://image17-c.poco.cn/best_pocoers/20150629/98872015062909234939981645_165.jpg" id="school_logo" class="setting-upload-preview img-circle"/>
-                            <form action="" enctype="multipart/form-data" method="post" id="setting-upload-img-form">
-                                <input type="file" class="setting-avatar" value="" name="setting-avatar"/>
-                            </form>
-                        </a>
-
-                        <!--关联水品牌-->
-                        <div class="brand-default-inform">
-                            <div class="span-inform-box distribution-title-box">
-                                <span>包含的水品牌</span>
-                                <a class="btn btn-primary btn-sm school-btn3" onclick="addBrandToSchool()">添加</a><button class="btn btn-default btn-sm brand-for-school-btn2">保存</button>
-                            </div>
-                        </div>
-                        <form class="brand-price-school-form" id="brand-price-school-form">
-                            <div class="brand-for-school-item">
-                                <select class="form-control" onchange="changeOptions(this)">
-                                    <option selected="true">娃哈1哈</option>
-                                    <option>昆2仑山</option>
-                                    <option>农3夫山泉</option>
-                                    <option>怡3宝</option>
-                                    <option>怡4宝</option>
-                                </select>
-                                <div class="col-xs-2 price-input">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">$</span>
-                                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                                        <span class="input-group-addon">元/桶</span>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-2 price-input">
-                                    <div class="input-group">
-                                        <span class="input-group-addon "><span class="glyphicon glyphicon-star"></span></span>
-                                        <input type="text" class="form-control " aria-label="Amount (to the nearest dollar)">
-                                        <span class="input-group-addon">积分/桶</span>
-                                    </div>
-                                </div>
-                                <a href="javascript:void(0)" class="brand-school-btn-delete" onclick="deleteBrandFromSchool(this)">删除</a>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
 
         <!--订水员管理-->
         <div class="row row-content display-none">
@@ -282,94 +216,6 @@
             </div>
         </div>
 
-        <!--订单管理-->
-        <div class="row row-content display-none ">
-            <div class="col-xs-10 main brand-manage ">
-                <!--订单管理-->
-                <div class="content content-left-border">
-                    <nav class="nav col-xs-12 table-box">
-                        <div class="table-control">
-                            <form class="form-horizontal">
-                                <!--时间-->
-                                <div class="calendar-box">
-                                    <fieldset>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <div class="input-prepend input-group">
-                                                    <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input type="text" readonly style="width: 200px" name="reservation" id="reservation-order" class="form-control back-color-w" value="2014-5-21 - 2014-6-21" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <script type="text/javascript">
-                                        $(document).ready(function() {
-                                            $('#reservation-order').daterangepicker(null, function(start, end, label) {
-                                                console.log(start.toISOString(), end.toISOString(), label);
-                                            });
-                                        });
-                                    </script>
-                                </div>
-
-                                <!--品牌-->
-                                <select class="form-control">
-                                    <option>品牌</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                                <!--学校-->
-                                <select class="form-control">
-                                    <option>学校</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                                <!--订单状态-->
-                                <select class="form-control">
-                                    <option>状态</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                                <a class="btn btn-sm table-btn table-check-btn">查看</a>
-
-                                <a class="btn btn-sm table-btn table-import-btn">删除</a>
-                                <a class="btn btn-sm table-btn table-import-btn">完成</a>
-                                <a class="btn btn-sm table-btn table-import-btn">导出</a>
-                            </form>
-                        </div>
-                    </nav>
-
-                    <!--表头-->
-                    <div class="table-content-box-head">
-                        <table class="table table-striped table-head-height">
-                            <thead>
-                            <tr>
-                                <th width="50"><input id="order-admin-ck" type="checkbox" class="checkbox-head" onclick="checkAll('order-admin','order-admin-ck')"/></th>
-                                <th width="140">日期</th>
-                                <th width="80">用户名</th>
-                                <th width="120">手机号</th>
-                                <th width="150">学校</th>
-                                <th width="90">宿舍号</th>
-                                <th width="90">品牌</th>
-                                <th width="60">数量</th>
-                                <th width="100">结算方式</th>
-                                <th width="90">状态</th>
-                                <th>操作</th>
-
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <!--表格内容-->
-                    <iframe id="order-admin" src="order-form.html" width="100%" height="79%" frameborder=”no” border=”0″ marginwidth=”0″ marginheight=”0″ scrolling="yes" allowtransparency=”yes”></iframe>
-
-                </div>
-            </div>
-        </div>
         <!--订单管理-订水老板-->
         <div class="row row-content display-none">
             <div class="col-xs-10 main brand-manage ">
@@ -401,8 +247,9 @@
                                 <!--品牌-->
                                 <select class="form-control" id="boss_send_status">
                                     <option value="">状态</option>
-                                    <option value="WAIT_SELLER_SEND_GOODS_MONEY">未配送</option>
-                                    <option value="TRADE_CLOSED">已配送</option>
+                                    <option value="0">未配送</option>
+                                    <option value="1">正在配送</option>
+                                    <option value="2">已配送</option>
                                 </select>
                                 <!--学校-->
                                 <select class="form-control" id="boss_send_sd">
@@ -429,7 +276,7 @@
 
                                 <a class="btn btn-sm table-btn table-import-btn" onclick="del_order_boss()">删除</a>
                                 <a class="btn btn-sm table-btn table-import-btn" onclick="finish_order_boss()">完成</a>
-                                <a class="btn btn-sm table-btn table-import-btn">导出</a>
+                                <a class="btn btn-sm table-btn table-import-btn" onclick="export_order_boss()">导出</a>
                             </form>
                         </div>
                     </nav>
@@ -449,9 +296,7 @@
                                 <th width="60">数量</th>
                                 <th width="70">送货员</th>
                                 <th width="90">结算方式</th>
-                                <th width="80">状态</th>
-                                <th>操作</th>
-
+                                <th>状态</th>
                             </tr>
                             </thead>
                         </table>
@@ -777,10 +622,7 @@
 
         </div>
 
-        <!--用户反馈-->
-        <div class="row row-content display-none">
 
-        </div>
     </div>
 
     <!--模态框-->

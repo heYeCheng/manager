@@ -25,19 +25,18 @@
                     <tbody>
                     <?php if(is_array($o_info)) foreach($o_info as $vo){ ?>
                     <tr>
-                        <input type="hidden" value='{$vo['detail']}@@{$vo['pay_type']}@@{$vo['status']}'>
+                        <input type="hidden" value='{$vo['pay_type']}@@{$vo['send_status']}'>
                         <td width="50"><input type="checkbox" value="{$vo['o_id']}" class="checkbox-tbody"/></td>
                         <td width="140">{$vo['created']}</td>
                         <td width="80">{$vo['name']}</td>
                         <td width="120">{$vo['phone']}</td>
                         <td width="150">{$vo['s_name']}</td>
                         <td width="80">{$vo['addr']}</td>
-                        <td width="80"></td>
-                        <td width="60"></td>
+                        <td width="80">{$vo['g_name']}</td>
+                        <td width="60">{$vo['num']}</td>
                         <td width="70">{$vo['send_name']}</td>
                         <td width="90"></td>
-                        <td class="static-red" width="80"></td>
-                        <td><a href="#" class="brand-btn-delete">完成</a><a href="#" class="brand-btn-delete">删除</a></td>
+                        <td class="static-red"></td>
                     </tr>
                     <?php } ?>
                     </tbody>
@@ -53,18 +52,18 @@
         val = $(this).find('input').val()
         valArr = val.split('@@')
         obj = jQuery.parseJSON(valArr[0]);
-        $(this).find('td:eq(6)').html(obj[0]['gname'])
-        $(this).find('td:eq(7)').html(obj[0]['num'])
 
-        if (valArr[1] == 0) {
+        if (valArr[0] == 0) {
             $(this).find('td:eq(9)').html('现金支付')
         }else{
             $(this).find('td:eq(9)').html('积分兑换')
         }
 
-        if (valArr[2] == 'TRADE_BUYER_SIGNED' || valArr[2] == 'TRADE_CLOSED') {
+        if (valArr[1] == 1) {
+            $(this).find('td:eq(10)').html('正在配送')
+        }else if (valArr[1] == 2) {
             $(this).find('td:eq(10)').html('已配送')
-        }else{
+        }else {
             $(this).find('td:eq(10)').html('未配送')
         }
 
