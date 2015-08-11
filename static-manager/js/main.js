@@ -306,3 +306,13 @@ function oneCheck(){
         btnSubstitute.style.display = 'block';
     }
 }
+
+//送水员关联他所负责的学校，选中某个校区后，获得option的value
+function getDistrictOption(){
+    var districtSelect = document.getElementById("distribution-district");
+    var selectedIndex = districtSelect.selectedIndex;
+    var selectedOpt = districtSelect.options[selectedIndex];
+
+    alert(selectedOpt.value);
+    alert(selectedOpt.label);
+}

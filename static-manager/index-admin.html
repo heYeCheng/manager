@@ -250,9 +250,9 @@
                                         <a class="btn btn-primary btn-sm school-btn" onclick="addDorToSchool()">添加宿舍</a>
                                         <a class="btn btn-sm school-btn-red" onclick="resetDor()">重置选项</a>
                                         <div class="district-box">
-                                            <select class="form-control">
-                                                <option>东校区</option>
-                                                <option>南校区</option>
+                                            <select id="distribution-district" class="form-control" onchange="getDistrictOption()">
+                                                <option value="0" label="东校区">东校区</option>
+                                                <option value="1" label="南校区">南校区</option>
                                             </select>
                                             <div class="clear"></div>
                                         </div>
