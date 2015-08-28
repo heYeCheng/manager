@@ -2,7 +2,7 @@
 //网站全局配置
 //在这里配置你所需的参数(与CanPHP无关)
 $config['ver']='2.0.2012.1203';//版本号,2.0.2012.1203表示发布日期
-
+date_default_timezone_set("PRC");
 //网站全局配置结束
 
 //日志和错误调试配置
@@ -50,7 +50,7 @@ $config['HTML_CACHE_RULE']['模块名2']['操作名2']=缓存时间;
 $config['DB_TYPE']='mysql';//数据库类型，一般不需要修改
 $config['DB_HOST']='127.0.0.1';//数据库主机，一般不需要修改
 $config['DB_USER']='root';//数据库用户名
-$config['DB_PWD']='hyc_ding_ling';//数据库密码
+$config['DB_PWD']='root';//数据库密码 hyc_ding_ling
 $config['DB_PORT']=3306;//数据库端口，mysql默认是3306，一般不需要修改
 $config['DB_NAME']='cheetah';//数据库名
 $config['DB_CHARSET']='utf8';//数据库编码，一般不需要修改

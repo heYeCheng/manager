@@ -54,6 +54,7 @@
                 <ul class="nav nav-sidebar">
                     <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(1)"><span class="icon-color glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;订单管理</span><!--<span class="badge">9999</span>--></a></li><!--订水老板版-->
                     <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(2)"><span class="icon-color glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
+                    <li class="leftBtn"><a href="get-qrcode.html" ><span class="icon-color glyphicon glyphicon-qrcode"></span>&nbsp;&nbsp;推广员系统</span></a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li class="leftBtn"><a href="javascript:void(0)" onclick="selectModule(3)"><span class="icon-color glyphicon glyphicon glyphicon-stats"></span>&nbsp;&nbsp;数据分析</span></a></li>
@@ -278,6 +279,14 @@
                                         <option value="0">北</option>
                                         <option value="1">南</option>
                                 </select>
+                                <!--用户状态-->
+                                <select class="form-control" id="user_static_c">
+                                    <option value="">用户状态－全部</option>
+                                    <option value="0">初次关注</option>
+                                    <option value="1">重复关注</option>
+                                    <option value="2">已取关</option>
+                                </select>
+
                                 <a class="btn btn-sm table-btn table-check-btn" onclick="check_user()">查看</a>
                                 <!-- <a class="btn btn-sm table-btn table-import-btn">删除</a>
                                 <a class="btn btn-sm table-btn table-import-btn">冻结</a> -->
@@ -292,13 +301,14 @@
                             <tr>
                                 <th width="50"><input id="user-table-ck" type="checkbox" class="checkbox-head" onclick="checkAll('user-table','user-table-ck')"/></th>
                                 <th width="140">注册日期</th>
-                                <th width="80">用户名</th>
+                                <th width="120">用户名</th>
                                 <th width="120">手机号</th>
                                 <th width="150">学校</th>
                                 <th width="90">宿舍号</th>
                                 <th width="100">拥有积分</th>
                                 <th width="90">状态</th>
-                                <th>操作</th>
+                                <th>推荐人</th>
+                                <th></th>
                             </tr>
                             </thead>
                         </table>
@@ -315,6 +325,11 @@
         </div>
 
         <!--用户反馈-->
+        <div class="row row-content display-none">
+
+        </div>
+
+        <!--推广员管理-->
         <div class="row row-content display-none">
 
         </div>

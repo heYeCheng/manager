@@ -26,12 +26,13 @@
                     <tr>
                         <td width="50"><input type="checkbox" class="checkbox-tbody"/></td>
                         <td width="140">{$vo['reg_time']}</td>
-                        <td width="80">{$vo['name']}</td>
+                        <td width="120">{$vo['name']}</td>
                         <td width="120">{$vo['phone']}</td>
                         <td width="150">{$vo['s_name']}-{$vo['c_name']}</td>
                         <td width="90">{$vo['addr']}</td>
                         <td width="100">{$vo['point']}</td>
-                        <td class="static-blue" width="90"></td>
+                        <td class="static-blue" width="90">初次关注</td>
+                        <td width="80">何业成</td>
                         <td></td>
                     </tr>
                     <?php } ?>
