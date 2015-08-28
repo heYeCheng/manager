@@ -56,9 +56,10 @@ class sendMod extends commonMod{
 		$a_id = $this->in_cookie('aid', None, 1, 'True');
 		$send_id = $this->in_get('id', None, 1, 'True');
 		$s_id = $this->in_get('sid', None, 1, 'True');
+		$c_id = $this->in_get('cid', None, 1, 'True');
 		$addrs = $this->in_get('addrs', None, 2, 'True');
 
-		$update_res = $sqlSend->set_send_info($a_id, $send_id, $s_id, $addrs);
+		$update_res = $sqlSend->set_send_info($a_id, $send_id, $s_id, $c_id, $addrs);
 
 		if ($update_res) {
 			echo('更新成功');

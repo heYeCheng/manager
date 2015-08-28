@@ -238,7 +238,7 @@ body{
 /*学校管理*/
 .brand-for-school-item{
     float: left;
-    margin-bottom:15px;
+    margin:20px 0 0 20px;
 }
 .brand-for-school-item select{
     width:150px;
@@ -246,7 +246,6 @@ body{
 }
 .brand-price-school-form{
     margin-top: 20px;
-    margin-left: 55px;
 }
 。
 .brand-price-school-form-distribution{
@@ -264,8 +263,7 @@ body{
     font-size: 14px;
     color:#666;
     position: relative;
-    bottom: 2px;
-    left: -4px;
+    left: 15px;
 }
 .school-btn3 {
     background: #428bca;
@@ -298,6 +296,26 @@ body{
     margin-top:7px;
     float: left;
 }
+.district-select{
+    width:150px;
+    float: left;
+    margin-right:15px;
+    margin-left:20px;
+}
+.school-title-inform-box{
+    float: left;
+}
+.school-title-inform-box span{
+    margin:0 20px 0 10px;
+}
+.district-box{
+    width:300px;
+    margin:10px 0 10px 0;
+}
+.district-box select{
+    margin-left:67px;
+}
+
 
 /*订水员管理*/
 .school-inform-box{
@@ -391,16 +409,23 @@ body{
 /*表头样式*/
 .table-content-box-head{
     width:100%;
-    height:45px;
+    height:auto;
     float: left;
     position: relative;
-    z-index:9999;
+    z-index:999;
+}
+.table-content-box-head table{
+    margin-bottom:0!important;
 }
 .table-head-height th{
     padding: 11px 8px 12px 8px!important;
     border-bottom:solid 2px #428bca!important;
     font-size: 16px!important;
     color:#000;
+}
+.th-btn{
+    margin:0 15px 0 0!important;
+    float: left!important;
 }
 .checkbox-head{
     width:15px;

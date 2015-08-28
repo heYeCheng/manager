@@ -46,79 +46,18 @@ function save_brand_pic(){
 
 /////////////// 以上是关于 品牌管理 模块
 
-/////////////// 以下是关于 学校管理 模块
-
-// 用于展示某个学校已经拥有的水品牌，即上架商品
-function showSchool(id, logo){
-	cur_school_id = id;
-	$('#school_logo').attr('src', logo)
-
-	$.getJSON("./brand/get_school_brand?id=" + id, function(data) {
-		$('.school_brand').each(function(i) {
-			if (i > 0) {
-				deleteBrandFromSchool_c(this)
-			};
-		});
-
-		for (var i = 0; i < data.length; i++) {
-			if (i > 0) {
-				addBrandToSchool();
-			};
-			$('.school_brand:eq('+ i +')').val(data[i]['f_id'])
-			$('.schoool_brand_div:eq('+ i +') .shool_brand_id').val(data[i]['g_id'])
-			$('.schoool_brand_div:eq('+ i +') .moneyBuddle').val(data[i]['price'])
-			$('.schoool_brand_div:eq('+ i +') .pointBuddle').val(data[i]['point'])
-		};
-		
-	}); 
-}
-
-// 保存上架的商品，将删除的商品下架
-function save_shool_brand(){
-	var oldObj = []
-	var newObj = []
-	$('.schoool_brand_div').each(function(){
-		idVal = $(this).find('.shool_brand_id').val()  // 商品的id
-		if (idVal) {  // 如果有商品的 id ，就证明这个商品已存在，否则为新增加商品，必需获得此商品的父级商品
-			oldObj.push([idVal, $(this).find('.moneyBuddle').val(), $(this).find('.pointBuddle').val()])
-		}else{
-			fid = $(this).find('.school_brand').val()
-			newObj.push([fid, $(this).find('.moneyBuddle').val(), $(this).find('.pointBuddle').val()])
-		}
-	});
-
-	arr = new Object();
-	arr.newO = newObj
-	arr.oldO = oldObj
-	str = JSON.stringify(arr)
-	str = encodeURI(str)
-	$.post("./brand/save_school_brand", {json:str, id:cur_school_id} ,function(data) {
-		alert('更新成功')
-	});
-}
-
-// 下架某学校的某个商品
-function dele_school_brand(obj){
-	idVal = $(obj).parent().find('.shool_brand_id').val()  // 商品的id
-	if (idVal) {  // 只允许删除有 商品id  的商品
-		$.get("./brand/del_school_brand", {gid:idVal, id:cur_school_id} ,function(data) {
-			alert('删除成功')
-		});
-	};
-}
-
-/////////////// 以上是关于 学校管理 模块
 
 /////////////// 以下是关于 订单管理——老板 模块
 function check_order_boss(){
 	status = $('#boss_send_status').val()
 	sd = $('#boss_send_sd').val()
 	sc = $('#boss_send_sc').val()
+	cid = $('#boss_send_c').val()
 	brand = $('#boss_send_brand').val()
 	date = $('#reservation-boss').val()
 	dateArr = date.split(' - ')
 
-	url = './oboss?status='+status + '&sd=' + sd + '&sc=' + sc + '&brand=' + brand + '&ex_d=' + dateArr[0] + '&pr_d=' + dateArr[1]
+	url = './oboss?status='+status + '&sd=' + sd + '&sc=' + sc + '&cid=' + cid + '&brand=' + brand + '&ex_d=' + dateArr[0] + '&pr_d=' + dateArr[1]
 	$('#order-boss').attr('src', url)
 }
 
@@ -128,7 +67,7 @@ function finish_order_boss(){
 		if (data == 1) {
 			alert('更新成功')
 		}else{
-			alert('更新失败')
+			alert('更新失败，必需勾选要更新的订单')
 		}
 	});
 }
@@ -139,14 +78,16 @@ function export_order_boss(){
 	status = $('#boss_send_status').val()
 	sd = $('#boss_send_sd').val()
 	sc = $('#boss_send_sc').val()
+	cid = $('#boss_send_c').val()
 	brand = $('#boss_send_brand').val()
 	date = $('#reservation-boss').val()
 	dateArr = date.split(' - ')
 
-	// $.get("./oboss/export", {'status':status, 'sd':'sd', 'sc':'sc', 'brand':'brand', 'ex_d':'ex_d', 'pr_d':'pr_d'} ,function(data) {
-	// });
-
-	url = './oboss/export?status='+ status + '&sd=' + sd + '&sc=' + sc + '&brand=' + brand + '&ex_d=' + dateArr[0] + '&pr_d=' + dateArr[1]
+	if(confirm("需要将这些数据标志为 正在配送 吗？")){
+		url = './oboss/export?mark=1&status='+ status + '&sd=' + sd + '&sc=' + sc + '&cid=' + cid + '&brand=' + brand + '&ex_d=' + dateArr[0] + '&pr_d=' + dateArr[1]
+	}else{
+		url = './oboss/export?mark=0&status='+ status + '&sd=' + sd + '&sc=' + sc + '&cid=' + cid + '&brand=' + brand + '&ex_d=' + dateArr[0] + '&pr_d=' + dateArr[1]
+	}
 	window.location.href = url
 }
 
@@ -156,7 +97,7 @@ function del_order_boss(){
 		if (data == 1) {
 			alert('删除成功')
 		}else{
-			alert('删除失败')
+			alert('删除失败，必需勾选要删除的订单')
 		}
 	});
 }
@@ -179,6 +120,94 @@ function checkSelect(iframe) {
 
 /////////////// 以上是关于 订单管理——老板 模块
 
+
+//////////////// 以下是关于 预定记录的查询模块
+function check_order_pre(){
+	sc = $('#boss_pre_sc').val()
+	cid = $('#boss_pre_c').val()
+	brand = $('#boss_pre_brand').val()
+	date = $('#reservation-schedule').val()
+	dateArr = date.split(' - ')
+
+	url = './oboss_pre?sc=' + sc + '&cid=' + cid + '&brand=' + brand + '&ex_d=' + dateArr[0] + '&pr_d=' + dateArr[1]
+	$('#schedule-tbody').attr('src', url)
+}
+
+function export_order_pre(){
+	// 导出 订单
+	sc = $('#boss_pre_sc').val()
+	brand = $('#boss_pre_brand').val()
+	date = $('#reservation-schedule').val()
+	dateArr = date.split(' - ')
+
+	url = './oboss_pre/export?sc=' + sc + '&cid=' + cid + '&brand=' + brand + '&ex_d=' + dateArr[0] + '&pr_d=' + dateArr[1]
+	window.location.href = url
+}
+
+function del_order_pre(){
+	// ids = checkSelect('order-boss');
+	// $.post("./oboss/mark", {'ids':ids, 'action':'del'} ,function(data) {
+	// 	if (data == 1) {
+	// 		alert('删除成功')
+	// 	}else{
+	// 		alert('删除失败')
+	// 	}
+	// });
+}
+
+//////////////// 以上是关于 预定记录的查询模块
+
+
+//////////////// 以下是关于 空桶管理模块
+function check_bucket(){
+	sc = $('#bucket_sc').val()
+	cid = $('#bucket_c').val()
+	addr = $('#bucket_addr').val()
+	url = './oboss_bucket?sc=' + sc + '&cid=' + cid + '&addr=' + addr 
+	$('#empty-tbody').attr('src', url)
+}
+
+function export_bucket(){
+	// 导出 订单
+	sc = $('#bucket_sc').val()
+	cid = $('#bucket_c').val()
+	addr = $('#bucket_addr').val()
+
+	if(confirm("需要将这些数据标志为 正在回收 吗？")){
+		url = './oboss_bucket/export?mark=1&sc=' + sc + '&cid=' + cid + '&addr=' + addr 
+	}else{
+		url = './oboss_bucket/export?mark=0&sc=' + sc + '&cid=' + cid + '&addr=' + addr 
+	}
+	window.location.href = url
+}
+
+function mark_bucket(){
+	// 将订单标记为已完成
+	sc = $('#bucket_sc').val()
+	cid = $('#bucket_c').val()
+	addr = $('#bucket_addr').val()
+	if(confirm("需要将这些数据标志为 空桶已回收 吗？此过程不可恢复")){
+		url = './oboss_bucket/mark?sc=' + sc + '&cid=' + cid + '&addr=' + addr 
+	}
+	window.location.href = url
+}
+
+function change_bucket(){
+	// 将订单标记为已完成
+	sc = $('#bucket_sc').val()
+	left_num = $('#left_bucket').val()
+	id = checkSelect('empty-tbody')
+	$.get("./oboss_bucket/change", {'id':id, 'sc':sc, 'num':left_num} ,function(data) {
+		if (data == 1) {
+			alert('更新成功')
+		}else{
+			alert('更新失败，必需选择学校才能进行更新')
+		}
+	});
+}
+//////////////// 以上是关于 空桶管理模块
+
+
 /////////////// 以下是关于 订水员管理 模块
 // 获取该品牌的详细信息，并进行赋值
 function showSend(id) {
@@ -186,8 +215,9 @@ function showSend(id) {
 	$.getJSON("./send/handleSend?type=show&id=" + id, function(data) {
 		sid = data['s_id'];
 		addr = data['addr'];
+		cid = data['c_id'];
 		$('#send_school').val(sid)
-
+		getDistrictOption('send_school', 'send_school_c')
 		$('.send_addr').each(function(i) {
 			if (i > 0) {
 				delDor_C(this)
@@ -200,7 +230,7 @@ function showSend(id) {
 			};
 			$('.send_addr:eq('+ i +')').val(addrArr[i])
 		};
-		
+		$('#send_school_c').val(cid)
 	}); 
 }
 
@@ -213,6 +243,7 @@ function delSend(id) {
 // 送水员信息的保存
 function save_send(){
 	sid = $('#send_school').val();
+	cid = $('#send_school_c').val();
 	addrs = 0;
 	$('.send_addr').each(function(i) {
 		if (i == 0) {
@@ -222,7 +253,7 @@ function save_send(){
 		}
 	});
 
-	$.get("./send/saveBasic", {'id':cur_send_id, 'sid':sid, 'addrs':addrs} ,function(data) {
+	$.get("./send/saveBasic", {'id':cur_send_id, 'sid':sid, 'cid':cid, 'addrs':addrs} ,function(data) {
 		alert(data)
 	}); 
 }

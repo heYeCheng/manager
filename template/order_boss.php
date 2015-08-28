@@ -12,7 +12,7 @@
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/iframe-table.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/iframe-table.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
                         <td width="140">{$vo['created']}</td>
                         <td width="80">{$vo['name']}</td>
                         <td width="120">{$vo['phone']}</td>
-                        <td width="150">{$vo['s_name']}</td>
+                        <td width="150">{$vo['s_name']}-{$vo['c_name']}</td>
                         <td width="80">{$vo['addr']}</td>
                         <td width="80">{$vo['g_name']}</td>
                         <td width="60">{$vo['num']}</td>
@@ -54,15 +54,21 @@
         obj = jQuery.parseJSON(valArr[0]);
 
         if (valArr[0] == 0) {
-            $(this).find('td:eq(9)').html('现金支付')
-        }else{
+            $(this).find('td:eq(9)').html('预付+提水')
+        }else if (valArr[0] == 1) {
+            $(this).find('td:eq(9)').html('提水')
+        }else if (valArr[0] == 2) {
+            $(this).find('td:eq(9)').html('线下支付')
+        }else if (valArr[0] == 3) {
             $(this).find('td:eq(9)').html('积分兑换')
         }
 
         if (valArr[1] == 1) {
             $(this).find('td:eq(10)').html('正在配送')
+            $(this).find('td:eq(10)').attr('class', 'static-gray')
         }else if (valArr[1] == 2) {
             $(this).find('td:eq(10)').html('已配送')
+            $(this).find('td:eq(10)').attr('class', 'static-blue')
         }else {
             $(this).find('td:eq(10)').html('未配送')
         }

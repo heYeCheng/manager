@@ -129,7 +129,8 @@ class brandMod extends commonMod{
 	public function get_school_brand(){
 		$sqlGood = new sql_goodMod();
 		$s_id = $this->in_get('id', None, 1, 'True');
-		$res = $sqlGood->get_brand_manager($s_id);
+		$c_id = $this->in_get('cid', None, 1, 'True');
+		$res = $sqlGood->get_brand_manager($s_id, $c_id);
 		echo json_encode($res);
 	}
 
@@ -155,15 +156,17 @@ class brandMod extends commonMod{
 		$newObj = $json['newO'];
 
 		foreach ($newObj as $value) {
-			$price = floatval($value[1]);
-			$point = intval($value[2]);
+			$price = floatval($value[2]);
+			$point = intval($value[3]);
 			$f_id = intval($value[0]);
+			$c_id = intval($value[1]);
 
 			$good_res = $sqlGood->get_good_manager($f_id);
 			if ($good_res) {
 				$data['t_id'] = 1;
 				$data['f_id'] = $f_id;
 				$data['s_id'] = $s_id;
+				$data['c_id'] = $c_id;
 				$data['a_id'] = $good_res['a_id'];
 				$data['g_name'] = $good_res['g_name'];
 				$data['pic'] = $good_res['pic'];

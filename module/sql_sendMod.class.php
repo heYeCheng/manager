@@ -53,7 +53,7 @@ class sql_sendMod extends commonMod{
 	public function get_send_info($a_id, $send_id){
 		$con['send_id'] = $send_id;
 		$con['a_id'] = $a_id;
-		$field = 's_id, addr';
+		$field = 's_id, c_id, addr';
 		
 		$res = $this->model->table($this->config['send'])->field($field)->where($con)->find();
 		return $res;
@@ -64,11 +64,12 @@ class sql_sendMod extends commonMod{
 	* @param a_id  销售商
 	* @param send_id  配送员 id
 	*/
-	public function set_send_info($a_id, $send_id, $s_id, $addr){
+	public function set_send_info($a_id, $send_id, $s_id, $c_id, $addr){
 		$con['send_id'] = $send_id;
 		$con['a_id'] = $a_id;
 		$data['addr'] = $addr;
 		$data['s_id'] = $s_id;
+		$data['c_id'] = $c_id;
 		
 		$res = $this->model->table($this->config['send'])->data($data)->where($con)->update();
 		return $res;

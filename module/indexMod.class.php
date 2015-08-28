@@ -18,8 +18,12 @@ class indexMod extends commonMod{
 			$this->assign('s_info', $school_info);
 
 			if ($_COOKIE['power'] == 0) {
-				$brand_info = $sqlGood->get_brand_manager();
+				$brand_info = $sqlGood->get_brand_manager(0);
 				$this->assign('b_info', $brand_info);
+
+				// 展示经销商
+				$admin_info = $sqlGood->get_admin_manager();
+				$this->assign('a_info', $admin_info);
 
 				$this->display('index-super');
 			}else if ($_COOKIE['power'] == 1) {

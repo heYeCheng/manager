@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>管理员管理系统</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/bootstrap-theme.min.css">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="__PUBLIC__/css/app.css">
 
     <!--日期选择插件-->
@@ -22,7 +22,6 @@
     <script type="text/javascript" src="__PUBLIC__/js/daterangepicker.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/main.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/handle.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/js/super_handle.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/checkbox.js"></script>
 </head>
 <body>
@@ -75,7 +74,7 @@
                         </div>
                         <ul class="nav nav-stacked brand-nav">
                             <?php if(is_array($s_info)) foreach($s_info as $vo){ ?>
-                                <li role="presentation"><a href="#" onclick="showSchool({$vo['s_id']}, '{$vo['pic']}', '{$vo['c_id']}@@{$vo['c_name']}')">{$vo['name']}</a></li>
+                                <li role="presentation"><a href="#" onclick="showSchool({$vo['s_id']}, '{$vo['pic']}')">{$vo['name']}</a></li>
                             <?php } ?>
                         </ul>
                     </div>
@@ -90,32 +89,33 @@
                         </div>
                         <p>学校LOGO</p>
                         <a class="setting-upload-avatar" href="javascript:;">
-                            <img src="" id="school_logo" class="setting-upload-preview img-circle"/>
+                            <img src="http://image17-c.poco.cn/best_pocoers/20150629/98872015062909234939981645_165.jpg" id="school_logo" class="setting-upload-preview img-circle"/>
                             <form action="" enctype="multipart/form-data" method="post" id="setting-upload-img-form">
                                 <input type="file" class="setting-avatar" value="" name="setting-avatar"/>
                             </form>
                         </a>
 
                         <!--关联水品牌-->
-                        <form class="brand-price-school-form" id="brand-price-school-form">
-                            <div class="brand-default-inform">
-                                <div class="span-inform-box">
-                                    <select class="form-control district-select" id="district-select" onchange="showSchool_brand(2)">
-                                        <option></option>
-                                    </select>
-                                    <div class="school-title-inform-box">
-                                        <span>包含的水品牌</span>
-                                        <a class="btn btn-primary btn-sm school-btn" onclick="addBrandToSchool()">添加</a><button class="btn btn-default btn-sm school-btn2" onclick="save_shool_brand()">保存</button>
-                                    </div>
-                                    <div class="clear"></div>
+                        <div class="brand-default-inform">
+                            <div class="span-inform-box">
+                                <select class="form-control district-select">
+                                    <option selected="true">东校区</option>
+                                    <option>南校区</option>
+                                    <option>北小区</option>
+                                    <option>西校区</option>
+                                </select>
+                                <div class="span-inform-box distribution-title-box">
+                                    <span>包含的水品牌</span>
+                                    <a class="btn btn-primary btn-sm school-btn3" onclick="addBrandToSchool()">添加</a><button class="btn btn-default btn-sm brand-for-school-btn2" onclick="save_shool_brand()">保存</button>
                                 </div>
                             </div>
-                            <div class="shool_brand_invisible">
-                                <?php if(is_array($b_info)) foreach($b_info as $vo){ ?>
-                                    <input type="hidden" value="{$vo['g_id']}@@{$vo['price']}@@{$vo['point']}">
-                                <?php } ?>
-                            </div>
-
+                        </div>
+                        <div class="shool_brand_invisible">
+                            <?php if(is_array($b_info)) foreach($b_info as $vo){ ?>
+                                <input type="hidden" value="{$vo['g_id']}@@{$vo['price']}@@{$vo['point']}">
+                            <?php } ?>
+                        </div>
+                        <form class="brand-price-school-form" id="brand-price-school-form" action="__URL__/brand/save_school_brand">
                             <div class="brand-for-school-item schoool_brand_div">
                                 <select class="form-control school_brand" onchange="changeOptions(this)">
                                     <!-- <option selected="true">娃哈1哈</option> -->
@@ -163,7 +163,7 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <div class="input-prepend input-group">
-                                                    <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input type="text" readonly style="width: 200px" name="reservation" id="reservation-order" class="form-control back-color-w" value="2015-7-25 - 2015-8-18" />
+                                                    <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input type="text" readonly style="width: 200px" name="reservation" id="reservation-order" class="form-control back-color-w" value="2014-5-21 - 2014-6-21" />
                                                 </div>
                                             </div>
                                         </div>
@@ -176,36 +176,36 @@
                                         });
                                     </script>
                                 </div>
-                                
+
+                                <!--品牌-->
+                                <select class="form-control">
+                                    <option>品牌</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
                                 <!--学校-->
-                                <select class="form-control" id="super_send_sc" onchange="getDistrictOption('super_send_sc', 'super_send_c')">
-                                    <option value="">学校</option>
-                                    <?php if(is_array($s_info)) foreach($s_info as $vo){ ?>
-                                        <option value="{$vo['s_id']}" label="{$vo['c_id']}@@{$vo['c_name']}">{$vo['name']}</option>
-                                    <?php } ?>
-                                </select>
-                                <!--校区-->
-                                <select class="form-control" id="super_send_c">
-                                    <option value="">校区</option>
-                                        <option value="0">北</option>
-                                        <option value="1">南</option>
-                                </select>
-                                <!--经销商-->
-                                <select class="form-control" id="super_send_sell">
-                                    <option value="">经销商</option>
-                                    <?php if(is_array($a_info)) foreach($a_info as $vo){ ?>
-                                        <option value="{$vo['a_id']}">{$vo['sell_name']}</option>
-                                    <?php } ?>
+                                <select class="form-control">
+                                    <option>学校</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </select>
                                 <!--订单状态-->
-                                <select class="form-control" id="super_send_sd">
-                                    <option value="">状态</option>
-                                    <option value="0">未配送</option>
-                                    <option value="1">正在配送</option>
-                                    <option value="2">已配送</option>
+                                <select class="form-control">
+                                    <option>状态</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </select>
-                                <a class="btn btn-sm table-btn table-check-btn" onclick="check_send_super()">查看</a>
-                                <a class="btn btn-sm table-btn table-import-btn" onclick="export_send_super()">导出</a>
+                                <a class="btn btn-sm table-btn table-check-btn">查看</a>
+
+                                <a class="btn btn-sm table-btn table-import-btn">删除</a>
+                                <a class="btn btn-sm table-btn table-import-btn">完成</a>
+                                <a class="btn btn-sm table-btn table-import-btn">导出</a>
                             </form>
                         </div>
                     </nav>
@@ -230,7 +230,7 @@
                         </table>
                     </div>
                     <!--表格内容-->
-                    <iframe id="order-admin" src="" width="100%" height="79%" frameborder=”no” border=”0″ marginwidth=”0″ marginheight=”0″ scrolling="yes" allowtransparency=”yes”></iframe>
+                    <iframe id="order-admin" src="order-form.html" width="100%" height="79%" frameborder=”no” border=”0″ marginwidth=”0″ marginheight=”0″ scrolling="yes" allowtransparency=”yes”></iframe>
 
                 </div>
             </div>
@@ -251,7 +251,7 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <div class="input-prepend input-group">
-                                                    <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input type="text" readonly style="width: 200px" name="reservation" id="reservation-user" class="form-control back-color-w" value="2015-7-25 - 2015-8-18" />
+                                                    <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input type="text" readonly style="width: 200px" name="reservation" id="reservation-user" class="form-control back-color-w" value="2014-5-21 - 2014-6-21" />
                                                 </div>
                                             </div>
                                         </div>
@@ -266,21 +266,35 @@
                                 </div>
 
                                 <!--学校-->
-                                <select class="form-control" id="user_school" onchange="getDistrictOption('user_school', 'user_school_c')">
+                                <select class="form-control">
                                     <option value="">学校</option>
                                     <?php if(is_array($s_info)) foreach($s_info as $vo){ ?>
-                                        <option value="{$vo['s_id']}" label="{$vo['c_id']}@@{$vo['c_name']}">{$vo['name']}</option>
+                                        <option value="{$vo['s_id']}">{$vo['name']}</option>
                                     <?php } ?>
                                 </select>
-                                <!--校区-->
-                                <select class="form-control" id="user_school_c">
-                                    <option value="">校区</option>
-                                        <option value="0">北</option>
-                                        <option value="1">南</option>
+
+                                <!--积分-->
+                                <select class="form-control">
+                                    <option>积分</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </select>
-                                <a class="btn btn-sm table-btn table-check-btn" onclick="check_user()">查看</a>
-                                <!-- <a class="btn btn-sm table-btn table-import-btn">删除</a>
-                                <a class="btn btn-sm table-btn table-import-btn">冻结</a> -->
+
+                                <!--状态-->
+                                <select class="form-control">
+                                    <option>状态</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+
+                                <a class="btn btn-sm table-btn table-check-btn">查看</a>
+
+                                <a class="btn btn-sm table-btn table-import-btn">删除</a>
+                                <a class="btn btn-sm table-btn table-import-btn">冻结</a>
                             </form>
                         </div>
                     </nav>
@@ -304,7 +318,7 @@
                         </table>
                     </div>
                     <!--表格内容-->
-                    <iframe id="user-table" src="" width="100%" height="79%" frameborder=”no” border=”0″ marginwidth=”0″ marginheight=”0″ scrolling="yes" allowtransparency=”yes”></iframe>
+                    <iframe id="user-table" src="user-form.html" width="100%" height="79%" frameborder=”no” border=”0″ marginwidth=”0″ marginheight=”0″ scrolling="yes" allowtransparency=”yes”></iframe>
                 </div>
             </div>
         </div>

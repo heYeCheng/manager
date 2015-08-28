@@ -105,6 +105,14 @@ class sql_goodMod extends commonMod{
 
 	///////////////////////////////////////////////////////////// 以下这些只面向管理员
 
+	// 获取所有经销商的信息
+	public function get_admin_manager(){
+		$field = 'a_id, sell_name';
+		$con = 'power = 1';
+		$res = $this->model->table('admin')->field($field)->where($con)->select();
+		return $res;
+	}
+
 	/**
 	* 获取某商品信息
 	* @param g_id  表示获取某款产品的信息
@@ -135,10 +143,13 @@ class sql_goodMod extends commonMod{
 	/**
 	* 获取此所有品牌信息，此级别是超级管理员接口
 	*/
-	public function get_brand_manager($s_id = 0){
+	public function get_brand_manager($s_id  , $c_id = 0){
 		$con['t_id'] = 1;
 		if ($s_id > 0) {
 			$con['s_id'] = $s_id;
+			if ($c_id > -1) {
+				$con['c_id'] = $c_id;
+			}
 			$field = 'a.sell_name as name, g_id, f_id, g_name, price, point';
 		}else{
 			$con['s_id'] = -1;

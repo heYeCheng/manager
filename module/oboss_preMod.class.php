@@ -1,19 +1,12 @@
 <?php
 require_once('./module/sql_orderMod.class.php');
 
-class obossMod extends commonMod{
+class oboss_preMod extends commonMod{
 	public function index(){
 		$sqlOrder = new sql_orderMod();
-		// get_order($a_id, $date = date('Y-m-d H',strtotime('-3 day')), $status = '', $sender = 0, $school = 0, $brand = 0)
+
 		$a_id = $this->in_cookie('aid', None, 1, 'True');
 		
-		$temp = $_GET['status'];
-		if (is_numeric($temp)) {
-			$status = $temp;
-		}else{
-			$status = -1;
-		}
-		$sender = $this->in_get('sd', 0, 1);
 		$school = $this->in_get('sc', 0, 1);
 		$cid = $this->in_get('cid', 0, 1);
 		$brand = $this->in_get('brand', 0, 1);
@@ -22,37 +15,29 @@ class obossMod extends commonMod{
 
 		$url = preg_replace("/&p=\d+/", '', $_SERVER['REQUEST_URI']);
 		$url .= '&p={page}';
-		$url = str_replace('oboss&p', 'oboss?p', $url);
+		$url = str_replace('oboss_pre&p', 'oboss_pre?p', $url);
 
 		if ($brand > 0 && $school > 0) {
 			$fid = $sqlOrder->get_fid_gid($brand, $school);
 			if ($fid) {
-				$res = $sqlOrder->get_order($a_id, $url, $status, $sender, $school, $cid, $fid, $ex_d, $pr_d);
+				$res = $sqlOrder->get_order_pre($a_id, $url, $school, $cid, $fid, $ex_d, $pr_d);
 			}else{
 				echo ('没有该品牌的订水情况');
 				$res = array('info' => '', 'page' => '');
 			}
 		}else{
-			$res = $sqlOrder->get_order($a_id, $url, $status, $sender, $school, $cid, $brand, $ex_d, $pr_d);
+			$res = $sqlOrder->get_order_pre($a_id, $url, $school, $cid, $brand, $ex_d, $pr_d);
 		}
 		$this->assign('o_info', $res['info']);
 		$this->assign('page', $res['page']);
-		$this->display('order_boss');
+		$this->display('order_pre');
 	}
 
 	public function export(){
 		$sqlOrder = new sql_orderMod();
 
 		$a_id = $this->in_cookie('aid', None, 1, 'True');
-		
-		$temp = $_GET['status'];
-		if (is_numeric($temp)) {
-			$status = $temp;
-		}else{
-			$status = -1;
-		}
-		$mark = $this->in_get('mark', 0, 1);
-		$sender = $this->in_get('sd', 0, 1);
+
 		$school = $this->in_get('sc', 0, 1);
 		$cid = $this->in_get('cid', 0, 1);
 		$brand = $this->in_get('brand', 0, 1);
@@ -62,35 +47,27 @@ class obossMod extends commonMod{
 		if ($brand > 0 && $school > 0) {
 			$fid = $sqlOrder->get_fid_gid($brand, $school);
 			if ($fid) {
-				$res = $sqlOrder->export_order($mark, $a_id, $status, $sender, $school, $cid, $fid, $ex_d, $pr_d);
+				$res = $sqlOrder->export_order_pre($a_id, $school, $cid, $fid, $ex_d, $pr_d);
 			}else{
-				$this->alert('没有该品牌的订水情况');
+				echo ('没有该品牌的订水情况');
 				$res = '';
 			}
 		}else{
-			$res = $sqlOrder->export_order($mark, $a_id, $status, $sender, $school, $cid, $brand, $ex_d, $pr_d);
+			$res = $sqlOrder->export_order_pre($a_id, $school, $cid, $brand, $ex_d, $pr_d);
 		}
+		
 		if ($res) {
 			header("Content-Type: application/$file_type;charset=gbk");
 			header("Content-Disposition: attachment; filename=1.xls");
 			header("Pragma: no-cache");
-			$title = "日期\t用户名\t手机号\t学校\t宿舍号\t品牌\t数量\t送货员\t结算方式\n";
+			$title = "日期\t用户名\t手机号\t学校\t宿舍号\t品牌\t预定数量\t剩余数量\n";
 			echo("$title");
 
 			foreach ($res as $key => $value) {
-				if ($value['pay_type'] == 0) {
-					$pay_type = '预付+提水';
-				}else if ($value['pay_type'] == 1) {
-					$pay_type = '提水';
-				}else if ($value['pay_type'] == 2) {
-					$pay_type = '线下支付';
-				}else if ($value['pay_type'] == 3) {
-					$pay_type = '积分兑换';
-				}
-				echo $value['created']. "\t".$value['name']. "\t".$value['phone']. "\t".$value['s_name'].'-'.$value['c_name']. "\t".$value['addr']. "\t".$value['g_name']. "\t".$value['num']. "\t".$value['send_name']. "\t".$pay_type. "\n";
+				echo $value['update_time']. "\t".$value['name']. "\t".$value['phone']. "\t".$value['s_name'].'-'.$value['c_name'] . "\t".$value['addr']. "\t".$value['g_name']. "\t".$value['pre_num']. "\t".$value['left_num']. "\n";
 			}
 		}else{
-			$this->alert('没有找到相关数据');
+			echo "没有找到相关数据";
 		}
 	}
 	
