@@ -1,4 +1,4 @@
-禷┑サ膕tatus
+禷┑サ膕tatuss...shenmeguia!!!
  1、WAIT_SELLER_SEND_GOODS_MONEY (等待卖家发货，但买家还没给钱)
  2、WAIT_SELLER_SEND_GOODS（等待卖家发货，即：买家已付款）
  3、WAIT_BUYER_CONFIRM_GOODS（等待买家确认收货，即：卖家已发货，买家已支付）
